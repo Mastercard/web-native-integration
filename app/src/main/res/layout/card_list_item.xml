@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/cart_list_margin_height"
+    android:background="@drawable/recycler_view_background_selector"
+    >
+
+  <ImageView
+      android:id="@+id/card_image"
+      android:layout_width="@dimen/cart_list_product_image_width"
+      android:layout_height="@dimen/cart_list_product_image_height"
+      android:layout_marginStart="@dimen/cart_list_margin_start"
+      android:layout_marginTop="@dimen/cart_list_margin_top"
+      android:src="@drawable/cart_item_default_image"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/cart_list_layout_height"
+      android:layout_marginStart="@dimen/cart_list_layout_margin_start"
+      android:layout_marginTop="@dimen/cart_list_margin_top"
+      android:layout_marginBottom="@dimen/cart_list_margin_bottom"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/card_image"
+      app:layout_constraintTop_toTopOf="parent"
+      >
+
+    <TextView
+        android:id="@+id/card_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="card name"
+        android:textSize="@dimen/cart_list_product_name_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cart_list_product_price_margin_top"
+        android:text="card price"
+        android:textSize="@dimen/cart_list_product_price_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_name"
+        />
+
+    <TextView
+        android:id="@+id/card_expiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/card_expiry_margin_end"
+        android:text="card expiry"
+        android:textSize="@dimen/cart_list_product_price_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/card_number"
+        />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

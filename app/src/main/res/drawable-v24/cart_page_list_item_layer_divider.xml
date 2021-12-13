@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:drawable="@drawable/cart_page_list_item_divider"
+    android:left="@dimen/cart_page_item_divider_left"
+    android:right="@dimen/cart_page_item_divider_right" />
+
+</layer-list>

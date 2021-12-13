@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fillViewport="true"
+    android:padding="10dp"
+    android:scrollbars="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/avlNetworksTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/available_networks"
+            android:textColor="@color/color_mc_black_50_opacity"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/presentationStyleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presentation_style"
+            android:textColor="@color/color_mc_black_50_opacity"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/checkbox_margin_top"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <CheckBox
+            android:id="@+id/masterCrdCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/mastercard"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avlNetworksTitleTxt" />
+
+        <CheckBox
+            android:id="@+id/actionSheetCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_sheet"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="@id/presentationStyleTitle"
+            app:layout_constraintTop_toBottomOf="@+id/presentationStyleTitle" />
+
+        <CheckBox
+            android:id="@+id/visaCrdCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/visa"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/masterCrdCB" />
+
+        <CheckBox
+            android:id="@+id/amexCrdCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/amex"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/visaCrdCB" />
+
+        <CheckBox
+
+            android:id="@+id/discoverCrdCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/discover"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amexCrdCB" />
+
+        <Button
+            android:id="@+id/initButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/init"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/discoverCrdCB" />
+
+        <TextView
+            android:id="@+id/initRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initButton" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/initScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initRequestTitleText">
+
+            <TextView
+                android:id="@+id/initRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/initResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/initResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initResponseTitleText">
+
+            <TextView
+                android:id="@+id/initResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <EditText
+            android:id="@+id/idLookupEmail"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/text_view_background"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/idLookupBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initResponseScroll" />
+
+        <Button
+            android:id="@+id/idLookupBtn"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/idlookup"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initResponseScroll" />
+
+        <TextView
+            android:id="@+id/idLookupRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idLookupEmail" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/idLookupRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idLookupRequestTitleText">
+
+            <TextView
+                android:id="@+id/idLookupRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/idLookupResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idLookupRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/idLookupResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idLookupResponseTitleText">
+
+            <TextView
+                android:id="@+id/idLookupResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <Spinner
+            android:id="@+id/initValidSelector"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/text_view_background"
+            app:layout_constraintEnd_toStartOf="@+id/initiateValidationBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/idLookupResponseScroll" />
+
+            <Button
+                android:id="@+id/initiateValidationBtn"
+                android:layout_width="170dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/initiate_validation"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idLookupResponseScroll"/>
+
+        <TextView
+            android:id="@+id/initiateValidationRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initValidSelector" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/initiateValidationScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initiateValidationRequestTitleText">
+
+            <TextView
+                android:id="@+id/initiateValidationRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/initiateValidationResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initiateValidationScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/initiateValidationResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initiateValidationResponseTitleText">
+
+            <TextView
+                android:id="@+id/initiateValidationResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <EditText
+            android:id="@+id/validateOtp"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:maxLines="1"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingStart="10dp"
+            android:background="@drawable/text_view_background"
+            android:hint="@string/otp"
+            app:layout_constraintEnd_toStartOf="@+id/validateBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initiateValidationResponseScroll" />
+
+        <Button
+            android:id="@+id/validateBtn"
+            android:layout_width="170dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/validate_button"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/initiateValidationResponseScroll" />
+
+
+        <TextView
+            android:id="@+id/validateRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/validateOtp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/validateRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/validateRequestTitleText">
+
+            <TextView
+                android:id="@+id/validateRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/validateResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/validateRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/validateResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/validateResponseTitleText">
+
+            <TextView
+                android:id="@+id/validateResponseText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <EditText
+            android:id="@+id/cardNumberText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/text_view_background"
+            android:hint="@string/card_number"
+            android:padding="10dp"
+            android:inputType="number"
+            android:maxLength="16"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/validateResponseScroll" />
+
+        <LinearLayout
+            android:id="@+id/cardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardNumberText">
+
+            <EditText
+                android:id="@+id/expiryDateText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:inputType="text"
+                android:maxLength="5"
+                android:background="@drawable/text_view_background"
+                android:hint="@string/exp"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/securityCodeText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="4"
+                android:maxLines="1"
+                android:background="@drawable/text_view_background"
+                android:hint="@string/cvc"
+                android:padding="10dp"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/encryptCardBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/encrypt_card"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardLayout" />
+
+
+        <TextView
+            android:id="@+id/encryptCardRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/encryptCardBtn" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/encryptCardRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/encryptCardRequestTitleText">
+
+            <TextView
+                android:id="@+id/encryptedCardRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <TextView
+            android:id="@+id/encryptedCardResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/encryptCardRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/encryptedCardResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/encryptedCardResponseTitleText">
+
+            <TextView
+                android:id="@+id/encryptedCardResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/checkoutWithNewCardBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/checkout_with_new_card"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/encryptedCardResponseScroll" />
+
+        <TextView
+            android:id="@+id/checkoutWithNewCardRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithNewCardBtn" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/checkoutWithNewCardRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithNewCardRequestTitleText">
+
+            <TextView
+                android:id="@+id/checkoutWithNewCardRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <TextView
+            android:id="@+id/checkoutWithNewCardResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithNewCardRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/checkoutWithNewCardResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithNewCardResponseTitleText">
+
+            <TextView
+                android:id="@+id/checkoutWithNewCardResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/orTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:textColor="@color/color_mc_black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithNewCardResponseScroll" />
+
+        <Button
+            android:id="@+id/getCardsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/get_cards"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orTitleTxt" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/card_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getCardsBtn" />
+
+        <TextView
+            android:id="@+id/getCardRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_recycler_view" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/getCardRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getCardRequestTitleText">
+
+            <TextView
+                android:id="@+id/getCardRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <TextView
+            android:id="@+id/getCardResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getCardRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/getCardResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getCardResponseTitleText">
+
+            <TextView
+                android:id="@+id/getCardsResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/checkoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/checkout_with_card"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getCardResponseScroll" />
+
+
+        <TextView
+            android:id="@+id/checkoutWithCardRequestTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/request"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutBtn" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/checkoutWithCardRequestScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithCardRequestTitleText">
+
+            <TextView
+                android:id="@+id/checkoutWithCardRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/checkoutWithCardResponseTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/response"
+            android:textColor="@color/color_mc_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithCardRequestScroll" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/checkoutWithCardResponseScroll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/nested_scroll_height"
+            android:layout_marginTop="5dp"
+            android:fillViewport="true"
+            android:isScrollContainer="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkoutWithCardResponseTitleText">
+
+            <TextView
+                android:id="@+id/checkoutResponse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_view_background"
+                android:enabled="true"
+                android:focusable="true"
+                android:longClickable="true"
+                android:padding="@dimen/response_padding"
+                android:scrollbars="vertical"
+                android:textColor="@color/response_text_color"
+                android:textIsSelectable="true" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1976d2</color>
+    <color name="colorPrimaryDark">#004ba0</color>
+    <color name="colorAccent">#63a4ff</color>
+    <color name="cart_page_item_divider_color">#E6E6E6</color>
+    <color name="response_text_color">#000000</color>
+    <color name="text_view_background_color">#FFFFFF</color>
+    <color name="text_view_text_color">#000000</color>
+    <color name="color_mc_black_50_opacity">#50141413</color>
+    <color name="color_mc_black">#141413</color>
+    <color name="border_edit_text_color">#97918A</color>
+    <color name="color_mc_orange_button_background_50_opacity">#50cf4500</color>
+    <color name="color_mc_white">#FFFFFF</color>
+</resources>

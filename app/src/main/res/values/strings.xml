@@ -1,0 +1,46 @@
+<resources>
+  <string name="app_name">Web Native Integration</string>
+  <string name="title">"V2 Integration "</string>
+  <string name="hintText_card_number">Card Number</string>
+  <string name="expiry_hint">Expiry (MM/YY)</string>
+  <string name="security_code_hint">Security code</string>
+  <string name="encrypt_card_button">Encrypt Card</string>
+  <string name="init_response_hint">Init Response</string>
+  <string name="get_cards_response_hint">Get Cards response</string>
+  <string name="checkout_response_hint">Checkout Response</string>
+  <string name="new_user_checkout_title">New User Checkout Flow</string>
+  <string name="recognized_user_checkout_title">Recognized User Checkout</string>
+  <string name="idlookup_button">Identity Lookup</string>
+  <string name="idlookup_response_hint">Identity Lookup Email</string>
+  <string name="initiate_validation_button">Initiate Validation</string>
+  <string name="initiate_validation_response_hint">Initiate Validation Response</string>
+  <string name="validate_response_hint">Enter OTP</string>
+  <string name="getCards_button">Get Cards</string>
+  <string name="validate_button">Validate</string>
+  <string name="checkout_with_card_button">Checkout With Button</string>
+  <string name="select_card">Select Card</string>
+  <string name="presentation_style">Presentation Style</string>
+  <string name="action_sheet">Action Sheet</string>
+
+  <string name="available_networks">Available Networks</string>
+  <string name="mastercard">Mastercard</string>
+  <string name="visa">Visa</string>
+  <string name="amex">Amex</string>
+  <string name="discover">Discover</string>
+  <string name="init">Init</string>
+  <string name="request">Request</string>
+  <string name="response">Response</string>
+  <string name="email">email</string>
+  <string name="idlookup">idLookup</string>
+  <string name="initiate_validation">initiateValidation</string>
+  <string name="otp">OTP</string>
+  <string name="card_number">Card Number</string>
+  <string name="exp">EXP</string>
+  <string name="cvc">CVC</string>
+  <string name="encrypt_card">encryptCard</string>
+  <string name="checkout_with_new_card">checkoutWithNewCard</string>
+  <string name="checkout_with_card">checkoutWithCard</string>
+  <string name="or">OR</string>
+  <string name="get_cards">getCards</string>
+  <string name="none_email_sms">None/Email/SMS</string>
+</resources>

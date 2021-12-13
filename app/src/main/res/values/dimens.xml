@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="cart_list_margin_top">14dp</dimen>
+  <dimen name="cart_list_margin_bottom">14dp</dimen>
+  <dimen name="cart_list_margin_height">78dp</dimen>
+  <dimen name="cart_list_margin_start">16dp</dimen>
+  <dimen name="cart_list_margin_end">16dp</dimen>
+  <dimen name="cart_list_product_image_width">70dp</dimen>
+  <dimen name="cart_list_product_image_height">40dp</dimen>
+  <dimen name="cart_list_layout_height">50dp</dimen>
+  <dimen name="cart_list_layout_margin_start">100dp</dimen>
+  <dimen name="cart_list_product_name_text_size">16dp</dimen>
+  <dimen name="cart_list_product_price_margin_top">5dp</dimen>
+  <dimen name="cart_list_product_price_text_size">14dp</dimen>
+  <string name="masked_last_four_digit">•••• %1s</string>
+  <dimen name="cart_page_item_divider_height">1dp</dimen>
+  <dimen name="cart_page_item_divider_left">16dp</dimen>
+  <dimen name="cart_page_item_divider_right">16dp</dimen>
+  <dimen name="card_expiry_margin_end">20dp</dimen>
+  <dimen name="main_layout_margin">20dp</dimen>
+  <dimen name="merchant_title_margin">20dp</dimen>
+  <dimen name="network_title_text_size">16dp</dimen>
+  <dimen name="network_title_margin_top">20dp</dimen>
+  <dimen name="checkbox_margin_top">10dp</dimen>
+  <dimen name="checkbox_text_size">16dp</dimen>
+  <dimen name="button_margin_top">20dp</dimen>
+  <dimen name="nested_scroll_height">100dp</dimen>
+  <dimen name="response_margin_top">8dp</dimen>
+  <dimen name="response_padding">10dp</dimen>
+  <dimen name="checkout_button_margin_top">10dp</dimen>
+  <dimen name="otp_margin_top">10dp</dimen>
+  <dimen name="email_id_padding_start">10dp</dimen>
+  <dimen name="email_id_layout_height">40dp</dimen>
+  <dimen name="email_id_margin_top">20dp</dimen>
+  <dimen name="text_size_H3">16sp</dimen>
+  <dimen name="padding_top_edit_text">10dp</dimen>
+  <dimen name="padding_bottom_edit_text">15dp</dimen>
+  <dimen name="padding_end_edit_text">10dp</dimen>
+  <dimen name="padding_start_edit_text">8dp</dimen>
+  <dimen name="border_width_edit_text">1dp</dimen>
+  <dimen name="corner_radius_edit_text">4dp</dimen>
+  <dimen name="shipping_street_address_margin_top">20dp</dimen>
+  <dimen name="contact_email_margin_top">20dp</dimen>
+</resources>

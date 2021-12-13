@@ -1,0 +1,31 @@
+{
+  "srcDpaId": "",
+  "cardBrands": [
+    "mastercard"
+  ],
+  "dpaTransactionOptions": {
+    "dpaAcceptedBillingCountries": [],
+    "dpaAcceptedShippingCountries": [],
+    "dpaBillingPreference": "FULL",
+    "dpaShippingPreference": "FULL",
+    "dpaLocale": "en_US",
+    "consumerNameRequested": true,
+    "consumerEmailAddressRequested": true,
+    "consumerPhoneNumberRequested": true,
+    "threeDsPreference": "NONE",
+    "paymentOptions": [
+      {
+        "dpaDynamicDataTtlMinutes": 15,
+        "dynamicDataType": "CARD_APPLICATION_CRYPTOGRAM_SHORT_FORM"
+      }
+    ],
+    "transactionAmount": {
+      "transactionAmount": 100,
+      "transactionCurrencyCode": "USD"
+    }
+  },
+  "dpaData": {
+    "dpaPresentationName": "Vitrine Test Merchant 1",
+    "dpaName": "Vitrine Test Merchant 1"
+  }
+}
