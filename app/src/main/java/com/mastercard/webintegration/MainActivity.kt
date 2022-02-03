@@ -1,3 +1,18 @@
+/* Copyright © 2022 Mastercard. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ =============================================================================*/
+
 package com.mastercard.webintegration
 
 import android.R
@@ -89,9 +104,9 @@ import java.lang.reflect.Type
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelectedListener {
-/**
- * Sample Merchant Activity showing integration of Click-to-Pay checkout experience.
- */
+  /**
+   * Sample Merchant Activity showing integration of Click-to-Pay checkout experience.
+   */
 
   lateinit var encryptedCard: String
   lateinit var validationResponse: List<MaskedCardsItem>
@@ -136,28 +151,30 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
       getCards()
     }
 
-        idLookupBtn.setOnClickListener {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-            if (idLookupEmail.text.toString().trim().isNotEmpty() && isValidEmail(idLookupEmail.text.toString().trim())) {
-                showProgressDialog()
-                idLookup()
-            }
-        }
+    idLookupBtn.setOnClickListener {
+      window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+      if (idLookupEmail.text.toString().trim()
+          .isNotEmpty() && isValidEmail(idLookupEmail.text.toString().trim())
+      ) {
+        showProgressDialog()
+        idLookup()
+      }
+    }
 
     initiateValidationBtn.setOnClickListener {
       showProgressDialog()
       initiateValidation()
     }
 
-        validateBtn.setOnClickListener {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-            if (validateOtp.text.toString().trim()
-                    .isNotEmpty() && validateOtp.text.toString().length == OTP_LENGTH
-            ) {
-                showProgressDialog()
-                validate()
-            }
-        }
+    validateBtn.setOnClickListener {
+      window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+      if (validateOtp.text.toString().trim()
+          .isNotEmpty() && validateOtp.text.toString().length == OTP_LENGTH
+      ) {
+        showProgressDialog()
+        validate()
+      }
+    }
 
     checkoutBtn.setOnClickListener(View.OnClickListener {
       showProgressDialog()
@@ -177,35 +194,35 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     val apiName = intent!!.getStringExtra(INTENT_API_NAME)
     val resultExtra = intent.getStringExtra(INTENT_API_RESPONSE)
 
-        when (apiName) {
-            "init" -> initResponse.text = resultExtra
-            "getCards" -> {
-                getCardsResponse.text = resultExtra
-                processGetCards(resultExtra);
-            }
-            "encryptCard" -> {
-                encryptedCard = resultExtra
-                encryptedCardResponse.text = resultExtra
-            }
-            "checkoutWithNewCard" -> checkoutWithNewCardResponse.text = resultExtra
-            "idLookup" -> {
-                idLookupResponse.text = resultExtra
-            }
-            "initiateValidation" -> initiateValidationResponse.text = resultExtra
-            "validate" -> {
-                val gson = Gson()
-                val type: Type = object : TypeToken<List<MaskedCardsItem>>() {}.type
+    when (apiName) {
+      "init" -> initResponse.text = resultExtra
+      "getCards" -> {
+        getCardsResponse.text = resultExtra
+        processGetCards(resultExtra);
+      }
+      "encryptCard" -> {
+        encryptedCard = resultExtra
+        encryptedCardResponse.text = resultExtra
+      }
+      "checkoutWithNewCard" -> checkoutWithNewCardResponse.text = resultExtra
+      "idLookup" -> {
+        idLookupResponse.text = resultExtra
+      }
+      "initiateValidation" -> initiateValidationResponse.text = resultExtra
+      "validate" -> {
+        val gson = Gson()
+        val type: Type = object : TypeToken<List<MaskedCardsItem>>() {}.type
 
-                validationResponse = gson.fromJson(resultExtra, type)
-                validateResponseText.text = resultExtra
-                setCardList(validationResponse)
-            }
-            "errorValidate" -> {
-                validateResponseText.text = resultExtra
-            }
-            "checkoutWithCard" -> checkoutResponse.text = resultExtra
-        }
+        validationResponse = gson.fromJson(resultExtra, type)
+        validateResponseText.text = resultExtra
+        setCardList(validationResponse)
+      }
+      "errorValidate" -> {
+        validateResponseText.text = resultExtra
+      }
+      "checkoutWithCard" -> checkoutResponse.text = resultExtra
     }
+  }
 
   private fun initializeView() {
     //val recognizedUserLayout: LinearLayout = findViewById(id.recognizedUserLayout)
@@ -300,7 +317,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     checkoutRequest.cardBrand = encryptCardResponse.cardBrand
     val checkoutRequestJson = gson.toJson(checkoutRequest)
     checkoutWithNewCardRequest.text = checkoutRequestJson
-    Log.d(TAG, "CheckoutRequest Json: "+checkoutRequestJson)
+    Log.d(TAG, "CheckoutRequest Json: " + checkoutRequestJson)
 
     val intent = Intent(this, WebViewIntegrationActivity::class.java)
     intent.putExtra(API_REQUEST, checkoutRequestJson)
@@ -405,7 +422,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     encryptCardRequest.cardholderFirstName = CARD_HOLDER_FIRST_NAME
     encryptCardRequest.cardholderLastName = CARD_HOLDER_LAST_NAME
     val billingAddress =
-      MaskedBillingAddress(ZIP, CITY, COUNTRY_CODE, NAME, STATE, LINE3, LINE2, LINE1,null)
+      MaskedBillingAddress(ZIP, CITY, COUNTRY_CODE, NAME, STATE, LINE3, LINE2, LINE1, null)
     encryptCardRequest.billingAddress = billingAddress
 
     return encryptCardRequest
@@ -471,7 +488,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
       ContextCompat.getDrawable(this, drawable.cart_page_list_item_layer_divider)?.let {
         DividerItemDecorator(
           it
-      )
+        )
       }
     if (dividerItemDecoration != null) {
       recyclerView.addItemDecoration(dividerItemDecoration)
@@ -524,33 +541,33 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     alert.show()
   }
 
-    private fun isValidEmail(email: String): Boolean {
-        val pattern: Pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
-    }
+  private fun isValidEmail(email: String): Boolean {
+    val pattern: Pattern = Patterns.EMAIL_ADDRESS
+    return pattern.matcher(email).matches()
+  }
 
-    companion object {
-      private val TAG = MainActivity::class.java.simpleName
-      private const val MESSAGE = "Please select at least one network"
-      private const val INIT_ERROR_MESSAGE = "Please provide srcDpaId"
-      private const val OK = "OK"
-      private const val ALERT_DIALOG = "Alert Dialog"
+  companion object {
+    private val TAG = MainActivity::class.java.simpleName
+    private const val MESSAGE = "Please select at least one network"
+    private const val INIT_ERROR_MESSAGE = "Please provide srcDpaId"
+    private const val OK = "OK"
+    private const val ALERT_DIALOG = "Alert Dialog"
 
-      private const val EXPIRY_MONTH_START = 0
-      private const val EXPIRY_MONTH_END = 2
-      private const val EXPIRY_YEAR_START = 3
-      private const val EXPIRY_YEAR_END = 5
-      private const val OTP_LENGTH = 6
+    private const val EXPIRY_MONTH_START = 0
+    private const val EXPIRY_MONTH_END = 2
+    private const val EXPIRY_YEAR_START = 3
+    private const val EXPIRY_YEAR_END = 5
+    private const val OTP_LENGTH = 6
 
-      private const val CARD_HOLDER_FIRST_NAME = "Jane"
-      private const val CARD_HOLDER_LAST_NAME = "Doe"
-      private const val NAME = "Jane Doe"
-      private const val LINE1 = "150 Fifth Ave "
-      private const val LINE2 = "string"
-      private const val LINE3 = "string"
-      private const val CITY = "New York"
-      private const val STATE = "NY"
-      private const val ZIP = "10011"
-      private const val COUNTRY_CODE = "US"
-    }
+    private const val CARD_HOLDER_FIRST_NAME = "Jane"
+    private const val CARD_HOLDER_LAST_NAME = "Doe"
+    private const val NAME = "Jane Doe"
+    private const val LINE1 = "150 Fifth Ave "
+    private const val LINE2 = "string"
+    private const val LINE3 = "string"
+    private const val CITY = "New York"
+    private const val STATE = "NY"
+    private const val ZIP = "10011"
+    private const val COUNTRY_CODE = "US"
+  }
 }
