@@ -17,10 +17,8 @@ package com.mastercard.webintegration.models
 
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import kotlin.Throws
-import okhttp3.OkHttpClient
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 /**
  * This class shows custom divider in Cart Page list.

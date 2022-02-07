@@ -20,16 +20,14 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.webkit.CookieManager
-import android.webkit.CookieSyncManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.mastercard.webintegration.R.layout
 import com.mastercard.webintegration.utils.Constants.ACTION_SHEET_MODE
 import com.mastercard.webintegration.utils.Constants.ACTIVITY_NAME
 import com.mastercard.webintegration.utils.Constants.MERCHANT_CONTEXT
@@ -42,7 +40,6 @@ import com.mastercard.webintegration.utils.Constants.METHOD_INIT
 import com.mastercard.webintegration.utils.Constants.METHOD_INITIATE_VALIDATION
 import com.mastercard.webintegration.utils.Constants.METHOD_NAME
 import com.mastercard.webintegration.utils.Constants.METHOD_VALIDATE
-import com.mastercard.webintegration.R.layout
 import kotlinx.android.synthetic.main.activity_webviewintegration.webView
 
 /**
@@ -77,7 +74,9 @@ class WebViewIntegrationActivity : Activity() {
     val methodName = intent.extras?.getString(METHOD_NAME);
 
     webView.settings.javaScriptEnabled = true
-    WebView.setWebContentsDebuggingEnabled(true);
+
+    //Set this to true to enable debugging of Javascript SDK inside Webview.
+    WebView.setWebContentsDebuggingEnabled(false);
 
     //Add @Javascript
     webView.addJavascriptInterface(JSBridge(this@WebViewIntegrationActivity), "JSBridge")
@@ -104,11 +103,7 @@ class WebViewIntegrationActivity : Activity() {
 
   override fun onStop() {
     Log.d(TAG, "ON STOP CALLED")
-    if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-      CookieManager.getInstance().flush()
-    } else {
-      CookieSyncManager.getInstance().sync()
-    }
+    CookieManager.getInstance().flush()
     super.onStop()
   }
 

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
   compileSdk 29
   buildToolsVersion "29.0.2"
@@ -30,6 +31,22 @@ android {
     jvmTarget = '1.8'
   }
 }
+sonarqube {
+  properties {
+    property "sonar.projectName", "WebNativeIntegration"
+    property "sonar.projectKey", "com.mastercard.webintegration"
+    property "sonar.tests", ["src/test/java"]
+    property "sonar.test.inclusions", "**/*Test*/**"
+    property "sonar.sourceEncoding", "UTF-8"
+    property "sonar.sources", "src/main/java"
+    property "sonar.exclusions", '**/*Test*/**,' +
+        '*.json,' +
+        '**/*test*/**,' +
+        '**/.gradle/**,' +
+        '**/R.class'
+  }
+}
+
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])

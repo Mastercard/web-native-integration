@@ -15,13 +15,10 @@ package com.mastercard.webintegration.ui
  =============================================================================*/
 
 import android.content.Context
-import com.google.android.material.textfield.TextInputLayout
 import android.graphics.ColorFilter
-import androidx.core.graphics.drawable.DrawableCompat
-import android.os.Bundle
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
-import android.widget.ProgressBar
+import androidx.core.graphics.drawable.DrawableCompat
+import com.google.android.material.textfield.TextInputLayout
 
 /**
  * Custom TextInputLayout with no background change when setError message instead of coloring the

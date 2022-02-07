@@ -16,16 +16,15 @@
 package com.mastercard.webintegration.models
 
 import android.util.Log
-import kotlin.Throws
 import okhttp3.OkHttpClient
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import androidx.recyclerview.widget.RecyclerView
-import java.lang.Exception
 import java.security.KeyStore
 import java.security.SecureRandom
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
-import javax.net.ssl.*
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
 
 /**
  * Default SSLContextFactory which will accept all certificate
@@ -42,7 +41,7 @@ class CommunicatorSSLContextFactory : SSLContextFactory {
             tmf.init(keyStore)
             sslContext.init(null, tmf.trustManagers, null)
         } else {
-            sslContext.init(null, trustAllCerts(), null)
+            sslContext.init(null, null, null)
         }
         return sslContext
     }// Install the all-trusting trust manager
@@ -58,14 +57,14 @@ class CommunicatorSSLContextFactory : SSLContextFactory {
             var okHttpClient: OkHttpClient? = null
             try {
                 // Install the all-trusting trust manager
-                val sslContext = SSLContext.getInstance(SSL_PROTOCOL)
+                val sslContext = SSLContext.getInstance(TLS_PROTOCOL)
                 sslContext.init(null, trustAllCerts(), SecureRandom())
 
                 // Create an ssl socket factory with our all-trusting manager
                 val sslSocketFactory = sslContext.socketFactory
                 val builder = OkHttpClient.Builder()
                 builder.sslSocketFactory(sslSocketFactory, trustAllCerts()!![0] as X509TrustManager)
-                builder.hostnameVerifier { hostname: String?, session: SSLSession? -> true }
+                // builder.hostnameVerifier { hostname: String?, session: SSLSession? -> true }
                 okHttpClient = builder.build()
             } catch (e: Exception) {
                 e.printStackTrace()

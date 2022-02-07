@@ -15,11 +15,6 @@
 
 package com.mastercard.webintegration.models
 
-import kotlin.Throws
-import okhttp3.OkHttpClient
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
-import androidx.recyclerview.widget.RecyclerView
-import java.lang.Exception
 import java.security.cert.Certificate
 import javax.net.ssl.SSLContext
 

@@ -103,6 +103,9 @@ import java.io.IOException
 import java.lang.reflect.Type
 import java.util.regex.Pattern
 
+/**
+ * Sample Android activity which performs native-side operations to interact with Javascript SDK APIs.
+ */
 class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelectedListener {
   /**
    * Sample Merchant Activity showing integration of Click-to-Pay checkout experience.
@@ -183,6 +186,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
   }
 
   override fun onBackPressed() {
+    //Required to disable back press
   }
 
   /**
@@ -467,6 +471,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
       }
 
       override fun afterTextChanged(editable: Editable) {
+        //Not required for implementation
       }
     })
   }
@@ -516,9 +521,11 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
   }
 
   override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    //Not required for implementation
   }
 
   override fun onNothingSelected(parent: AdapterView<*>?) {
+    //Not required for implementation
   }
 
   private fun showDialog(message: String) {
