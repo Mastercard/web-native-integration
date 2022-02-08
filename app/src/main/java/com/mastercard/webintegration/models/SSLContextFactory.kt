@@ -22,12 +22,12 @@ import javax.net.ssl.SSLContext
  * SSLContextFactory interface to generate SSLContext
  */
 interface SSLContextFactory {
-    /**
-     * Implement this method to create SSLContext
-     * @param x509Certificate certificate used to generate SSLContext
-     * @return
-     * @throws Exception
-     */
-    @Throws(Exception::class)
-    fun build(x509Certificate: Certificate?): SSLContext
+  /**
+   * Implement this method to create SSLContext
+   * @param x509Certificate certificate used to generate SSLContext
+   * @return
+   * @throws Exception
+   */
+  @Throws(Exception::class)
+  fun build(x509Certificate: Certificate?): SSLContext
 }

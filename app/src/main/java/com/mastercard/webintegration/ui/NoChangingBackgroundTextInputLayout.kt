@@ -25,41 +25,39 @@ import com.google.android.material.textfield.TextInputLayout
  * textbox background red.
  */
 class NoChangingBackgroundTextInputLayout : TextInputLayout {
-    constructor(context: Context?) : super(context!!) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(
-        context!!, attrs
-    ) {
-    }
+  constructor(context: Context?) : super(context!!)
+  constructor(context: Context?, attrs: AttributeSet?) : super(
+    context!!, attrs
+  )
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context!!, attrs, defStyleAttr
-    ) {
-    }
+  constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    context!!, attrs, defStyleAttr
+  )
 
-    override fun setError(error: CharSequence?) {
-        super.setError(error)
-        val defaultColorFilter = backgroundDefaultColorFilter
-        updateBackgroundColorFilter(defaultColorFilter)
-    }
+  override fun setError(error: CharSequence?) {
+    super.setError(error)
+    val defaultColorFilter = backgroundDefaultColorFilter
+    updateBackgroundColorFilter(defaultColorFilter)
+  }
 
-    override fun drawableStateChanged() {
-        super.drawableStateChanged()
-        val defaultColorFilter = backgroundDefaultColorFilter
-        updateBackgroundColorFilter(defaultColorFilter)
-    }
+  override fun drawableStateChanged() {
+    super.drawableStateChanged()
+    val defaultColorFilter = backgroundDefaultColorFilter
+    updateBackgroundColorFilter(defaultColorFilter)
+  }
 
-    private fun updateBackgroundColorFilter(colorFilter: ColorFilter?) {
-        if (editText != null && editText!!.background != null) {
-            editText!!.background.colorFilter = colorFilter
-        }
+  private fun updateBackgroundColorFilter(colorFilter: ColorFilter?) {
+    if (editText != null && editText!!.background != null) {
+      editText!!.background.colorFilter = colorFilter
     }
+  }
 
-    private val backgroundDefaultColorFilter: ColorFilter?
-        private get() {
-            var defaultColorFilter: ColorFilter? = null
-            if (editText != null && editText!!.background != null) {
-                defaultColorFilter = DrawableCompat.getColorFilter(editText!!.background)
-            }
-            return defaultColorFilter
-        }
+  private val backgroundDefaultColorFilter: ColorFilter?
+    private get() {
+      var defaultColorFilter: ColorFilter? = null
+      if (editText != null && editText!!.background != null) {
+        defaultColorFilter = DrawableCompat.getColorFilter(editText!!.background)
+      }
+      return defaultColorFilter
+    }
 }

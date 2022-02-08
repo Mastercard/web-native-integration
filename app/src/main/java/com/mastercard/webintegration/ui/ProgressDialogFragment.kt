@@ -37,49 +37,49 @@ import androidx.fragment.app.FragmentManager
 </pre> *
  */
 class ProgressDialogFragment : DialogFragment() {
-    var progressDialog: Dialog? = null
+  var progressDialog: Dialog? = null
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        progressDialog = Dialog(context!!)
-        progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val progressBar = ProgressBar(context)
-        progressBar.isIndeterminate = true
-        progressDialog!!.setContentView(progressBar)
-        isCancelable = false
-        return progressDialog!!
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    progressDialog = Dialog(context!!)
+    progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    val progressBar = ProgressBar(context)
+    progressBar.isIndeterminate = true
+    progressDialog!!.setContentView(progressBar)
+    isCancelable = false
+    return progressDialog!!
+  }
+
+  companion object {
+    private var progressDialogFragment: ProgressDialogFragment? = null
+
+    /**
+     * Shows progress indicator
+     */
+    fun showProgressDialog(fragmentManager: FragmentManager?) {
+      if (instance != null && !instance!!
+          .isAdded
+      ) {
+        instance!!.show(
+          fragmentManager!!, null
+        )
+      }
     }
 
-    companion object {
-        private var progressDialogFragment: ProgressDialogFragment? = null
-
-        /**
-         * Shows progress indicator
-         */
-        fun showProgressDialog(fragmentManager: FragmentManager?) {
-            if (instance != null && !instance!!
-                    .isAdded
-            ) {
-                instance!!.show(
-                    fragmentManager!!, null
-                )
-            }
+    private val instance: ProgressDialogFragment?
+      private get() {
+        if (progressDialogFragment == null) {
+          progressDialogFragment = ProgressDialogFragment()
         }
+        return progressDialogFragment
+      }
 
-        private val instance: ProgressDialogFragment?
-            private get() {
-                if (progressDialogFragment == null) {
-                    progressDialogFragment = ProgressDialogFragment()
-                }
-                return progressDialogFragment
-            }
-
-        /**
-         * Dismisses progress indicator
-         */
-        fun dismissProgressDialog() {
-            if (progressDialogFragment != null) {
-                progressDialogFragment!!.dismissAllowingStateLoss()
-            }
-        }
+    /**
+     * Dismisses progress indicator
+     */
+    fun dismissProgressDialog() {
+      if (progressDialogFragment != null) {
+        progressDialogFragment!!.dismissAllowingStateLoss()
+      }
     }
+  }
 }

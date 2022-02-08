@@ -15,7 +15,6 @@
 
 package com.mastercard.webintegration
 
-import android.R
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -69,6 +68,7 @@ import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.Builder
 import kotlinx.android.synthetic.main.activity_main.actionSheetCB
+import kotlinx.android.synthetic.main.activity_main.amexCrdCB
 import kotlinx.android.synthetic.main.activity_main.cardNumberText
 import kotlinx.android.synthetic.main.activity_main.checkoutBtn
 import kotlinx.android.synthetic.main.activity_main.checkoutResponse
@@ -76,6 +76,7 @@ import kotlinx.android.synthetic.main.activity_main.checkoutWithCardRequest
 import kotlinx.android.synthetic.main.activity_main.checkoutWithNewCardBtn
 import kotlinx.android.synthetic.main.activity_main.checkoutWithNewCardRequest
 import kotlinx.android.synthetic.main.activity_main.checkoutWithNewCardResponse
+import kotlinx.android.synthetic.main.activity_main.discoverCrdCB
 import kotlinx.android.synthetic.main.activity_main.encryptCardBtn
 import kotlinx.android.synthetic.main.activity_main.encryptedCardRequest
 import kotlinx.android.synthetic.main.activity_main.encryptedCardResponse
@@ -98,6 +99,7 @@ import kotlinx.android.synthetic.main.activity_main.validateBtn
 import kotlinx.android.synthetic.main.activity_main.validateOtp
 import kotlinx.android.synthetic.main.activity_main.validateRequest
 import kotlinx.android.synthetic.main.activity_main.validateResponseText
+import kotlinx.android.synthetic.main.activity_main.visaCrdCB
 import okhttp3.OkHttpClient
 import java.io.IOException
 import java.lang.reflect.Type
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     addTextChangeListenerForCardExpiry()
 
     initButton.setOnClickListener {
-      if (masterCrdCB.isChecked) {
+      if (masterCrdCB.isChecked || amexCrdCB.isChecked || discoverCrdCB.isChecked || visaCrdCB.isChecked) {
         init()
       } else {
         showDialog(MESSAGE)
@@ -202,7 +204,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
       "init" -> initResponse.text = resultExtra
       "getCards" -> {
         getCardsResponse.text = resultExtra
-        processGetCards(resultExtra);
+        processGetCards(resultExtra)
       }
       "encryptCard" -> {
         encryptedCard = resultExtra
@@ -234,7 +236,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     recyclerView.layoutManager = LinearLayoutManager(this)
 
     //Set layout to use when the list of choices appear
-    val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, validateOptionsArray)
+    val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, validateOptionsArray)
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     initValidSelector.adapter = adapter
   }
@@ -246,18 +248,43 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     val gson = Gson()
     clearTextFields()
     val jsonFileString = getJsonDataFromAsset(applicationContext, "initRequest.json")
-    initRequest.text = jsonFileString
 
     val initRequestObject =
       gson.fromJson(jsonFileString, InitRequest::class.java)
+
+    if (initRequestObject.cardBrands != null) {
+      initRequestObject.cardBrands!!.clear()
+    }
+
+    var selectedNetworks = LinkedHashSet<String>()
+
+    if (masterCrdCB.isChecked) {
+      selectedNetworks.add(getString(R.string.mastercard).lowercase())
+    }
+    if (visaCrdCB.isChecked) {
+      selectedNetworks.add(getString(R.string.visa).lowercase())
+    }
+
+    if (amexCrdCB.isChecked) {
+      selectedNetworks.add(getString(R.string.amex).lowercase())
+    }
+
+    if (discoverCrdCB.isChecked) {
+      selectedNetworks.add(getString(R.string.discover).lowercase())
+    }
+
+    initRequestObject.cardBrands?.addAll(selectedNetworks)
 
     if (initRequestObject.srcDpaId?.isEmpty()!!) {
       showDialog(INIT_ERROR_MESSAGE)
     } else {
       showProgressDialog()
       val intent = Intent(this, WebViewIntegrationActivity::class.java)
-      intent.putExtra(API_REQUEST, jsonFileString)
-      Log.d(TAG, "InitRequest Request: $jsonFileString")
+      val initRequestJson = gson.toJson(initRequestObject)
+      initRequest.text = initRequestJson
+      Log.d(TAG, "InitRequest: $initRequestJson")
+
+      intent.putExtra(API_REQUEST, initRequestJson)
       intent.putExtra(MERCHANT_CONTEXT, packageName) //Must be passed to receive the API response
       intent.putExtra(
         METHOD_NAME,
@@ -270,22 +297,22 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
   }
 
   private fun clearTextFields() {
-    initRequest.setText("")
-    initResponse.setText("")
+    initRequest.text = ""
+    initResponse.text = ""
     idLookupEmail.setText("")
-    idLookupRequest.setText("")
-    idLookupResponse.setText("")
-    initiateValidationResponse.setText("")
+    idLookupRequest.text = ""
+    idLookupResponse.text = ""
+    initiateValidationResponse.text = ""
     validateOtp.setText("")
-    validateRequest.setText("")
-    validateResponseText.setText("")
+    validateRequest.text = ""
+    validateResponseText.text = ""
     cardNumberText.setText("")
     expiryDateText.setText("")
     securityCodeText.setText("")
-    encryptedCardRequest.setText("")
-    encryptedCardResponse.setText("")
-    checkoutWithNewCardRequest.setText("")
-    checkoutWithNewCardResponse.setText("")
+    encryptedCardRequest.text = ""
+    encryptedCardResponse.text = ""
+    checkoutWithNewCardRequest.text = ""
+    checkoutWithNewCardResponse.text = ""
   }
 
   private fun getCards() {
@@ -335,8 +362,8 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
 
   private fun idLookup() {
     val intent = Intent(this, WebViewIntegrationActivity::class.java)
-    val idLookupRequest = getIdLookupRequest();
-    Log.d(TAG, "IdLookup Request: $idLookupRequest");
+    val idLookupRequest = getIdLookupRequest()
+    Log.d(TAG, "IdLookup Request: $idLookupRequest")
     intent.putExtra(API_REQUEST, idLookupRequest)
     intent.putExtra(MERCHANT_CONTEXT, packageName)
     intent.putExtra(METHOD_NAME, METHOD_ID_LOOKUP)
@@ -482,7 +509,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
 
     val cardList: List<MaskedCardsItem> = gson.fromJson(response, type)
     if (cardList.isNotEmpty()) {
-      setCardList(cardList);
+      setCardList(cardList)
     }
   }
 

@@ -26,19 +26,19 @@ import com.google.gson.annotations.SerializedName
  * 2. **Return User Checkout:** This checkout flow is for a returning user registered on SRC
  * system. *** srcDigitalCardId *** is a required parameter to initiate this checkout flow.
  */
-data class CheckoutRequest (
-    @SerializedName("srcDigitalCardId")
-    var srcDigitalCardId: String? = null,
+data class CheckoutRequest(
+  @SerializedName("srcDigitalCardId")
+  var srcDigitalCardId: String? = null,
 
-    @SerializedName("cardBrand")
-    var cardBrand: String? = null,
+  @SerializedName("cardBrand")
+  var cardBrand: String? = null,
 
-    @SerializedName("encryptedCard")
-    var encryptedCard: String? = null,
+  @SerializedName("encryptedCard")
+  var encryptedCard: String? = null,
 
-    @SerializedName("srciActionCode")
-    var srciActionCode: String? = null,
+  @SerializedName("srciActionCode")
+  var srciActionCode: String? = null,
 
-    @SerializedName("windowRef")
-    var windowRef: String? = null
-    )
+  @SerializedName("windowRef")
+  var windowRef: String? = null
+)
