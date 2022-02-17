@@ -113,9 +113,9 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
    * Sample Merchant Activity showing integration of Click-to-Pay checkout experience.
    */
 
-  lateinit var encryptedCard: String
+  var encryptedCard: String = ""
   lateinit var validationResponse: List<MaskedCardsItem>
-  lateinit var srciDigitalCardId: String
+  var srciDigitalCardId: String = ""
   lateinit var recyclerView: RecyclerView
   var validateOptionsArray = arrayOf("None", "Email", "SMS")
 
@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
       if (masterCrdCB.isChecked || amexCrdCB.isChecked || discoverCrdCB.isChecked || visaCrdCB.isChecked) {
         init()
       } else {
-        showDialog(MESSAGE)
+        showMessageDialog(MESSAGE)
       }
     }
 
@@ -147,13 +147,19 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     }
 
     checkoutWithNewCardBtn.setOnClickListener {
-      showProgressDialog()
-      checkoutWithNewCard()
+      if(encryptedCard.isEmpty()) {
+        showMessageDialog(resources.getString(R.string.card_encryption_error))
+      } else {
+        showProgressDialog()
+        checkoutWithNewCard()
+      }
     }
 
     getCardsBtn.setOnClickListener {
-      showProgressDialog()
-      getCards()
+      if(!initResponse.text.isEmpty()) {
+        showProgressDialog()
+        getCards()
+      }
     }
 
     idLookupBtn.setOnClickListener {
@@ -182,8 +188,12 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     }
 
     checkoutBtn.setOnClickListener(View.OnClickListener {
-      showProgressDialog()
-      checkoutWithCard()
+      if(srciDigitalCardId.isEmpty()) {
+        showMessageDialog(resources.getString(R.string.select_card_message))
+      } else {
+        showProgressDialog()
+        checkoutWithCard()
+      }
     })
   }
 
@@ -276,7 +286,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     initRequestObject.cardBrands?.addAll(selectedNetworks)
 
     if (initRequestObject.srcDpaId?.isEmpty()!!) {
-      showDialog(INIT_ERROR_MESSAGE)
+      showMessageDialog(INIT_ERROR_MESSAGE)
     } else {
       showProgressDialog()
       val intent = Intent(this, WebViewIntegrationActivity::class.java)
@@ -555,7 +565,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     //Not required for implementation
   }
 
-  private fun showDialog(message: String) {
+  private fun showMessageDialog(message: String) {
     val dialogBuilder = AlertDialog.Builder(this)
 
     // set message of alert dialog

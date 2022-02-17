@@ -43,4 +43,6 @@
   <string name="or">OR</string>
   <string name="get_cards">getCards</string>
   <string name="none_email_sms">None/Email/SMS</string>
+  <string name="select_card_message">Please select a Card for checkout</string>
+  <string name="card_encryption_error">Please Encrypt Card before checkout</string>
 </resources>
