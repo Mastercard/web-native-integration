@@ -20,7 +20,6 @@ import okhttp3.OkHttpClient
 import java.security.KeyStore
 import java.security.SecureRandom
 import java.security.cert.Certificate
-import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
@@ -44,9 +43,8 @@ class CommunicatorSSLContextFactory : SSLContextFactory {
       sslContext.init(null, null, null)
     }
     return sslContext
-  }// Install the all-trusting trust manager
+  }
 
-  // Create an ssl socket factory with our all-trusting manager
   /**
    * This method returns trust all ssl okHttpClient
    *
@@ -56,14 +54,24 @@ class CommunicatorSSLContextFactory : SSLContextFactory {
     get() {
       var okHttpClient: OkHttpClient? = null
       try {
+
+        val trustManagerFactory =
+          TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+        trustManagerFactory.init(null as KeyStore?)
+        val trustManagers: Array<TrustManager> = trustManagerFactory.trustManagers
+        check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) {
+          "Unexpected default trust managers:" + trustManagers.contentToString()
+        }
+        val trustManager = trustManagers[0] as X509TrustManager
+
         // Install the all-trusting trust manager
         val sslContext = SSLContext.getInstance(TLS_PROTOCOL)
-        sslContext.init(null, trustAllCerts(), SecureRandom())
+        sslContext.init(null, arrayOf<TrustManager>(trustManager), SecureRandom())
 
         // Create an ssl socket factory with our all-trusting manager
         val sslSocketFactory = sslContext.socketFactory
         val builder = OkHttpClient.Builder()
-        builder.sslSocketFactory(sslSocketFactory, trustAllCerts()!![0] as X509TrustManager)
+        builder.sslSocketFactory(sslSocketFactory, trustManager)
         // builder.hostnameVerifier { hostname: String?, session: SSLSession? -> true }
         okHttpClient = builder.build()
       } catch (e: Exception) {
@@ -73,41 +81,6 @@ class CommunicatorSSLContextFactory : SSLContextFactory {
       return okHttpClient
     }
 
-  /**
-   * Trust all ssl certificate
-   *
-   * @return TrustManager[] accepted trust certificates will be returned
-   */
-  private fun trustAllCerts(): Array<TrustManager>? {
-    var trustAllCerts: Array<TrustManager>? = null
-    try {
-      trustAllCerts = arrayOf(
-        object : X509TrustManager {
-          override fun getAcceptedIssuers(): Array<X509Certificate?> {
-            return arrayOfNulls(0)
-          }
-
-          override fun checkClientTrusted(
-            certs: Array<X509Certificate>,
-            authType: String
-          ) {
-            // Trust all Client Certs
-          }
-
-          override fun checkServerTrusted(
-            certs: Array<X509Certificate>,
-            authType: String
-          ) {
-            // Trust all Server Certs
-          }
-        }
-      )
-    } catch (e: Exception) {
-      e.printStackTrace()
-      Log.d(TAG, "Exception while trusting certificate: " + e.message)
-    }
-    return trustAllCerts
-  }
 
   companion object {
     private val TAG = CommunicatorSSLContextFactory::class.java.simpleName

@@ -57,7 +57,7 @@ class CardAdapter(
     }
     loadImages(cardItem.digitalCardData.artUri, cardViewHolder.cardImageView)
     cardViewHolder.itemView.isSelected = selectedPos == position
-    cardViewHolder.cardItemLayout.setOnClickListener { v: View? ->
+    cardViewHolder.cardItemLayout.setOnClickListener {
       cardViewHolder.cardItemLayout.requestFocusFromTouch()
       view.setSrcDigitalCardId(cardItem.srcDigitalCardId)
       notifyItemChanged(selectedPos)
