@@ -57,6 +57,7 @@ import com.mastercard.webintegration.request.CheckoutRequest
 import com.mastercard.webintegration.request.EncryptCardRequest
 import com.mastercard.webintegration.request.IdLookupRequest
 import com.mastercard.webintegration.request.InitRequest
+import com.mastercard.webintegration.request.InitiateValidationRequest
 import com.mastercard.webintegration.request.ValidateRequest
 import com.mastercard.webintegration.response.EncryptCardResponse
 import com.mastercard.webintegration.ui.ProgressDialogFragment
@@ -174,7 +175,7 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
 
     initiateValidationBtn.setOnClickListener {
       showProgressDialog()
-      initiateValidation()
+      initiateValidation(initValidSelector.selectedItem.toString())
     }
 
     validateBtn.setOnClickListener {
@@ -382,9 +383,20 @@ class MainActivity : AppCompatActivity(), DisplayView, AdapterView.OnItemSelecte
     startActivity(intent)
   }
 
-  private fun initiateValidation() {
+  private fun initiateValidation(channel: String?) {
     val intent = Intent(this, WebViewIntegrationActivity::class.java)
-    intent.putExtra(API_REQUEST, "{}")
+    val initiateValidationRequestValue = InitiateValidationRequest()
+
+    when (channel) {
+      "None" -> initiateValidationRequestValue.requestedValidationChannelId = "None"
+      "SMS" -> initiateValidationRequestValue.requestedValidationChannelId = "SMS"
+      "Email" -> initiateValidationRequestValue.requestedValidationChannelId = "Email"
+    }
+
+    val gson = Gson()
+    val initiateValidationJson = gson.toJson(initiateValidationRequestValue)
+
+    intent.putExtra(API_REQUEST, initiateValidationJson)
     intent.putExtra(MERCHANT_CONTEXT, packageName)
     intent.putExtra(METHOD_NAME, METHOD_INITIATE_VALIDATION)
     intent.putExtra(ACTIVITY_NAME, this.localClassName)
