@@ -98,19 +98,43 @@ function idLookup(platform, apiRequest) {
         });
 }
 
+let responseObject = null
 function initiateValidation(platform, apiRequest) {
-	console.log('inside initiateValidation:')
+  console.log('inside initiateValidation:')
 
-	click2payInstance.initiateValidation().then(
-		value => {
-			var formattedResponses = JSON.stringify(value, null, 2);
-			console.groupCollapsed('InitiateValidation API response:')
-			console.log(formattedResponses)
-			console.groupEnd();
-			sendMessageToNative(platform, value, "initiateValidation");
-		}).catch(error =>{
-		sendMessageToNative(platform, error, "initiateValidation");
-		console.log('InitiateValidation API rejected '+ error)
+  let request = JSON.parse(apiRequest);
+	console.log("the request is " + request.requestedValidationChannelId)
+
+	let initiateValidation = null
+  if (responseObject === null) {
+    console.log("calling initiate validation for the first time")
+    initiateValidation = click2payInstance.initiateValidation()
+  } else {
+    console.log("nth initiate validation call")
+
+    let channelFound = false
+    for (let i = 0; i < responseObject.supportedValidationChannels.length; i++) {
+      if (responseObject.supportedValidationChannels[i].identityType === request.requestedValidationChannelId) {
+        request.requestedValidationChannelId = responseObject.supportedValidationChannels[i].validationChannelId
+        channelFound = true
+      }
+    }
+
+    initiateValidation = channelFound? click2payInstance.initiateValidation(request): click2payInstance.initiateValidation()
+  }
+
+  initiateValidation.then(
+    value => {
+      let formattedResponses = JSON.stringify(value, null, 2);
+      console.groupCollapsed('InitiateValidation API response:')
+      console.log(formattedResponses)
+      console.groupEnd();
+      sendMessageToNative(platform, value, "initiateValidation");
+      responseObject = value
+      console.log(responseObject)
+    }).catch(error =>{
+    sendMessageToNative(platform, error, "initiateValidation");
+    console.log('InitiateValidation API rejected '+ error)
         });
 }
 
